@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keboola — Financial Intelligence Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            /* House Style Palette */
+            --bg-paper: #f0f0eb;
+            --gray-line: #a4aaa8;
+            --gray-light: #e5e6e3;
+            --ink-navy: #1a1a2c;
+            --dark-neutral: #333542;
+            
+            --accent-cobalt: #2864dc;
+            --accent-violet: #783cdc;
+            --accent-teal: #147864;
+            --accent-orange: #8c503c;
+            
+            --surface: #ffffff;
+            --surface-alt: #fafaf8;
+            
+            /* Shape Language */
+            --radius-lg: 8px;
+            --radius-md: 6px;
+            --radius-sm: 4px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-paper);
+            color: var(--ink-navy);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV - Flat and architectural */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--gray-line);
+        }
+
+        nav .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            height: 56px;
+            gap: 32px;
+            overflow-x: auto;
+            padding: 0 40px;
+        }
+
+        nav .logo {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--ink-navy);
+            white-space: nowrap;
+            flex-shrink: 0;
+            letter-spacing: -0.5px;
+        }
+
+        nav .logo span {
+            color: var(--accent-cobalt);
+            font-weight: 400;
+            margin-left: 6px;
+        }
+
+        nav a {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--dark-neutral);
+            text-decoration: none;
+            white-space: nowrap;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--accent-cobalt);
+            border-bottom-color: var(--accent-cobalt);
+        }
+
+        /* SECTIONS */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .sn {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: var(--gray-line);
+            margin-bottom: 12px;
+        }
+
+        .st {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -1px;
+            color: var(--ink-navy);
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .ss {
+            font-size: 15px;
+            color: var(--dark-neutral);
+            margin-bottom: 48px;
+            max-width: 720px;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: var(--gray-line);
+            opacity: 0.5;
+            margin: 20px 0;
+        }
+
+        /* CARD - Flat vector precision */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--gray-line);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .cp {
+            padding: 40px;
+        }
+
+        .src-line {
+            text-align: center;
+            font-size: 11px;
+            color: var(--gray-line);
+            margin-top: 24px;
+        }
+
+        /* A1 STATS */
+        .stats-row {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 220px;
+            max-width: 300px;
+            text-align: center;
+            padding: 32px 24px;
+            border-right: 1px solid var(--gray-light);
+        }
+        
+        .stat-card:last-child {
+            border-right: none;
+        }
+
+        .stat-num {
+            font-size: 64px;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 12px;
+            letter-spacing: -2px;
+        }
+
+        .stat-num.blue { color: var(--accent-cobalt); }
+        .stat-num.amber { color: var(--accent-orange); }
+
+        .stat-bar {
+            width: 80px;
+            height: 2px;
+            background: var(--gray-light);
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .stat-bar-f { height: 100%; }
+        .stat-bar-f.blue { background: var(--accent-cobalt); }
+        .stat-bar-f.amber { background: var(--accent-orange); }
+
+        .stat-desc {
+            font-size: 13px;
+            color: var(--dark-neutral);
+            line-height: 1.6;
+        }
+
+        .stat-desc strong {
+            color: var(--ink-navy);
+            font-weight: 600;
+        }
+
+        .tension {
+            text-align: center;
+            font-size: 16px;
+            color: var(--ink-navy);
+            font-weight: 500;
+            padding: 24px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .tension em { color: var(--accent-orange); font-style: normal; font-weight: 700; }
+
+        /* A2 CHARTS */
+        .charts-row {
+            display: flex;
+            gap: 48px;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .chart-group {
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+        }
+
+        .chart-group h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: var(--ink-navy);
+        }
+
+        .donut-wrap {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 32px;
+        }
+
+        .donut-wrap svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .donut-ctr {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-hero { font-size: 24px; font-weight: 600; color: var(--ink-navy); letter-spacing: -1px; }
+        .donut-sub { font-size: 10px; color: var(--gray-line); font-weight: 500; }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 16px;
+            justify-content: center;
+        }
+
+        .leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--dark-neutral); font-weight: 500; }
+        .ldot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+        .insight {
+            text-align: center;
+            font-size: 14px;
+            color: var(--dark-neutral);
+            font-weight: 500;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* GROWTH PROJECTIONS */
+        .growth-row { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+        .growth-card {
+            flex: 1; min-width: 200px; max-width: 260px;
+            background: var(--surface-alt); border: 1px solid var(--gray-light);
+            border-radius: var(--radius-md); padding: 24px 16px; text-align: center;
+        }
+        .growth-card .gc-num { font-size: 32px; font-weight: 500; color: var(--accent-orange); line-height: 1; letter-spacing: -1px; }
+        .growth-card .gc-lbl { font-size: 11px; color: var(--dark-neutral); margin-top: 12px; line-height: 1.4; }
+        .growth-note { text-align: center; font-size: 12px; color: var(--dark-neutral); margin-top: 24px; }
+        .growth-note em { color: var(--accent-orange); font-style: normal; font-weight: 600; }
+
+        .app-trajectory {
+            display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+            margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--gray-light);
+        }
+        .traj-card {
+            text-align: center; padding: 12px; flex: 1; min-width: 100px;
+        }
+        .traj-card .traj-yr { font-size: 10px; color: var(--gray-line); margin-bottom: 4px; font-weight: 600; }
+        .traj-card .traj-num { font-size: 24px; font-weight: 500; color: var(--ink-navy); line-height: 1; }
+        .traj-card .traj-lbl { font-size: 10px; color: var(--dark-neutral); margin-top: 6px; }
+        .traj-card.future .traj-num { color: var(--accent-orange); }
+        .traj-arrow { display: flex; align-items: center; color: var(--gray-line); font-size: 14px; }
+
+        /* TAGLINE HERO */
+        .tagline-hero {
+            text-align: center; padding: 64px 40px;
+            background: var(--surface-alt);
+            border: 1px solid var(--gray-line);
+            border-radius: var(--radius-lg);
+        }
+        .tagline-hero .tl-main { font-size: 28px; font-weight: 400; color: var(--gray-line); line-height: 1.4; letter-spacing: -0.5px; }
+        .tagline-hero .tl-em { font-size: 28px; font-weight: 600; color: var(--ink-navy); display: block; margin-top: 8px; letter-spacing: -0.5px; }
+        .tagline-hero .tl-quest { font-size: 14px; color: var(--dark-neutral); margin-top: 16px; font-style: italic; }
+
+        /* EVO */
+        .evo-track { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 24px 0; }
+        .evo-stage { display: flex; flex-direction: column; align-items: center; width: 160px; text-align: center; }
+        .evo-iw {
+            width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; font-size: 24px; border: 1px solid var(--gray-line); background: var(--surface);
+        }
+        .evo-stage h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--ink-navy); }
+        .evo-stage p { font-size: 11px; color: var(--dark-neutral); }
+        .evo-arr { font-size: 16px; color: var(--gray-line); margin: 0; }
+        .evo-barrier { display: flex; flex-direction: column; align-items: center; margin: 0 16px; }
+        .evo-bl { width: 1px; height: 80px; border-left: 1px dashed var(--gray-line); }
+        .evo-blbl {
+            background: var(--bg-paper); border: 1px solid var(--gray-line); border-radius: 4px; padding: 4px 8px; font-size: 9px;
+            color: var(--dark-neutral); font-weight: 600; margin-top: -45px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .evo-stage.final .evo-iw { border: 2px solid var(--accent-cobalt); color: var(--accent-cobalt); }
+        .evo-note {
+            text-align: center; font-size: 13px; color: var(--dark-neutral); margin-top: 32px; max-width: 660px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        /* FLYWHEEL */
+        .fw-ctr { display: flex; justify-content: center; padding: 24px 0; }
+        .fw-ctr svg { max-width: 440px; width: 100%; }
+        .fw-nb { fill: var(--surface); stroke: var(--accent-cobalt); stroke-width: 1.5; }
+        .fw-i { font-size: 16px; text-anchor: middle; dominant-baseline: central; }
+        .fw-l { font-size: 10px; fill: var(--ink-navy); text-anchor: middle; font-weight: 500; }
+        .fw-sl { font-size: 8px; fill: var(--dark-neutral); text-anchor: middle; }
+        .fw-a { fill: none; stroke: var(--accent-cobalt); stroke-width: 1.5; opacity: 0.4; }
+        .fw-ah { fill: var(--accent-cobalt); opacity: 0.8; }
+        .fw-o { font-size: 9px; fill: var(--accent-cobalt); text-anchor: middle; font-weight: 500; }
+
+        /* A3 SPAGHETTI - Editorial precise lines */
+        .sp-svg { width: 100%; max-height: 500px; }
+        .nr { fill: var(--surface); stroke: var(--gray-line); stroke-width: 1; rx: 4; ry: 4; }
+        .nr.hub { fill: var(--surface-alt); stroke: var(--ink-navy); stroke-width: 1.5; }
+        .ni { font-size: 18px; text-anchor: middle; dominant-baseline: central; }
+        .nl { font-size: 11px; fill: var(--ink-navy); text-anchor: middle; font-weight: 500; }
+        .nsl { font-size: 9px; fill: var(--dark-neutral); text-anchor: middle; }
+        .fok { stroke: var(--accent-cobalt); stroke-width: 1; fill: none; opacity: 0.7; }
+        .fint { stroke: var(--gray-line); stroke-width: 1; fill: none; stroke-dasharray: 4 4; opacity: 0.8; }
+        .fbrk { stroke: var(--accent-orange); stroke-width: 1; fill: none; stroke-dasharray: 4 4; opacity: 0.8; }
+        .bw { fill: var(--surface); stroke: var(--accent-orange); stroke-width: 1; rx: 2; ry: 2; }
+        .be { fill: var(--surface); stroke: var(--accent-orange); stroke-width: 1; rx: 2; ry: 2; }
+        .bs { fill: var(--surface); stroke: var(--accent-violet); stroke-width: 1; rx: 2; ry: 2; }
+        .btw { fill: var(--accent-orange); font-size: 8px; text-anchor: middle; dominant-baseline: central; }
+        .bte { fill: var(--accent-orange); font-size: 8px; text-anchor: middle; dominant-baseline: central; }
+        .bts { fill: var(--accent-violet); font-size: 8px; text-anchor: middle; dominant-baseline: central; }
+
+        /* A4 BEFORE/AFTER */
+        .tabs { display: flex; gap: 8px; margin-bottom: 32px; justify-content: center; }
+        .tab {
+            padding: 8px 16px; border: 1px solid var(--gray-line); border-radius: 4px;
+            font-size: 12px; font-weight: 500; color: var(--dark-neutral); cursor: pointer;
+            background: var(--surface); user-select: none;
+        }
+        .tab.active { background: var(--accent-cobalt); color: var(--surface); border-color: var(--accent-cobalt); }
+        .scenario { display: none; }
+        .scenario.active { display: block; }
+        .comparison { display: flex; gap: 0; flex-wrap: wrap; border: 1px solid var(--gray-line); border-radius: var(--radius-lg); overflow: hidden; }
+        .before, .after { flex: 1; min-width: 280px; padding: 40px; }
+        .before { background: var(--surface-alt); border-right: 1px solid var(--gray-line); }
+        .after { background: var(--surface); }
+        .sl { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 12px; }
+        .before .sl { color: var(--accent-orange); }
+        .after .sl { color: var(--accent-cobalt); }
+        .s-title { font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--ink-navy); letter-spacing: -0.5px; }
+        .tl { display: flex; flex-direction: column; gap: 24px; }
+        .tli { display: flex; gap: 16px; align-items: flex-start; }
+        .tlm {
+            width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 10px; flex-shrink: 0; border: 1px solid var(--gray-line); background: var(--surface); color: var(--ink-navy);
+        }
+        .before .tlm { border-color: var(--accent-orange); color: var(--accent-orange); }
+        .after .tlm { border-color: var(--accent-cobalt); color: var(--accent-cobalt); }
+        .tld { font-size: 11px; font-weight: 600; color: var(--ink-navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .tlp { font-size: 13px; color: var(--dark-neutral); line-height: 1.5; }
+        .bdg { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 10px; border: 1px solid var(--gray-line); margin-top: 8px; }
+        .br { color: var(--accent-orange); border-color: var(--accent-orange); }
+        .bg { color: var(--accent-teal); border-color: var(--accent-teal); }
+        .bb { color: var(--accent-cobalt); border-color: var(--accent-cobalt); }
+        .diff { margin-top: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-md); text-align: center; }
+        .diff h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--ink-navy); }
+        .diff p { font-size: 13px; color: var(--dark-neutral); }
+        .diff em { color: var(--accent-cobalt); font-style: normal; font-weight: 500; }
+
+        /* =================== A5 MARCHITECTURE — UNIFIED CANVAS =================== */
+        .march-canvas {
+            background: var(--surface-alt);
+            border: 1px solid var(--gray-line);
+            border-radius: var(--radius-lg);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .march-top { display: flex; align-items: stretch; position: relative; }
+
+        .m-src-col {
+            width: 140px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; gap: 12px;
+            padding-right: 32px; border-right: 1px dashed var(--gray-line);
+        }
+
+        .si {
+            display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--surface);
+            border: 1px solid var(--gray-line); border-radius: var(--radius-sm); font-size: 11px; color: var(--ink-navy); font-weight: 500;
+        }
+        .si .ar { margin-left: auto; color: var(--gray-line); font-size: 10px; }
+
+        .panes-area { flex: 1; display: flex; justify-content: space-between; gap: 16px; padding: 0 32px; position: relative; }
+        .panes-bg-line { position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: var(--accent-cobalt); opacity: 0.3; z-index: 0; }
+
+        .pane {
+            flex: 1; background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-md);
+            display: flex; flex-direction: column; align-items: center; padding: 24px 16px; z-index: 1; position: relative;
+        }
+        .pane h4 { font-size: 12px; font-weight: 600; color: var(--ink-navy); margin-bottom: 8px; text-align: center; }
+        .pane p { font-size: 10px; color: var(--dark-neutral); text-align: center; margin-bottom: 24px; line-height: 1.4; }
+        .pane .pane-vis { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; }
+
+        .flow-node {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--accent-cobalt);
+            position: absolute; top: calc(50% - 3px); z-index: 2; border: 1px solid var(--surface);
+        }
+        .fn-1 { left: -3px; }
+        .fn-2 { right: -3px; }
+
+        .m-graph-col {
+            width: 240px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding-left: 32px; border-left: 1px dashed var(--gray-line);
+        }
+        
+        .gov {
+            width: 100%; aspect-ratio: 1; border: 1px solid var(--gray-line); border-radius: 50%; position: relative;
+            background: var(--surface); display: flex; align-items: center; justify-content: center;
+        }
+        .gov-l {
+            position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--surface-alt);
+            padding: 2px 8px; font-size: 10px; color: var(--accent-cobalt); border: 1px solid var(--gray-line); border-radius: 4px; font-weight: 500;
+        }
+        
+        .gsvg { width: 90%; height: 90%; }
+        .gn circle { fill: var(--surface); stroke: var(--accent-cobalt); stroke-width: 1; }
+        .gn text { font-size: 6px; fill: var(--ink-navy); text-anchor: middle; }
+        .gn .gni { font-size: 10px; text-anchor: middle; dominant-baseline: central; }
+        .ge { stroke: var(--gray-line); stroke-width: 0.5; fill: none; }
+        .ges { stroke: var(--accent-cobalt); stroke-width: 1; opacity: 0.5; }
+
+        .cm-b {
+            margin-top: 16px; background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-sm);
+            padding: 8px 12px; font-size: 10px; color: var(--ink-navy); text-align: center;
+        }
+        .cm-b strong { display: block; font-size: 11px; color: var(--accent-orange); margin-bottom: 2px; font-weight: 600;}
+
+        .march-bottom { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--gray-line); display: flex; flex-direction: column; }
+        .pipeline-title { text-align: center; font-size: 10px; color: var(--ink-navy); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+
+        .pipe-row { display: flex; gap: 0; align-items: stretch; margin-bottom: 8px; }
+        .pipe-row:last-child { margin-bottom: 0; }
+
+        .pipe-row-label {
+            width: 140px; flex-shrink: 0; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; 
+            display: flex; align-items: center; justify-content: flex-end; text-align: right; padding-right: 32px; 
+        }
+        .pipe-row-label.fin { color: var(--accent-cobalt); }
+        .pipe-row-label.biz { color: var(--dark-neutral); }
+
+        .pipe-cells { flex: 1; display: flex; gap: 8px; }
+        
+        .pipe-cell {
+            flex: 1; border-radius: var(--radius-sm); padding: 10px 4px; text-align: center; font-size: 9px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            border: 1px solid var(--gray-line); background: var(--surface);
+        }
+        .pipe-cell .pc-id { font-weight: 700; font-size: 9px; margin-bottom: 4px; }
+        .pipe-cell.std .pc-id { color: var(--accent-teal); }
+        .pipe-cell.cust .pc-id { color: var(--accent-orange); }
+        .pipe-cell .pc-name { color: var(--ink-navy); font-weight: 500; }
+        .pipe-cell.biz-cell .pc-name { color: var(--dark-neutral); font-weight: 500; }
+        
+        .pipe-connect { display: flex; align-items: center; justify-content: center; padding-left: 140px; margin-bottom: 8px; }
+        .pipe-connect-inner { flex: 1; display: flex; justify-content: space-around; }
+        .pc-arrow { color: var(--gray-line); font-size: 10px; }
+
+        .pipe-legend { text-align: center; margin-top: 24px; font-size: 10px; color: var(--dark-neutral); display: flex; justify-content: center; gap: 24px; }
+        .pipe-legend span { display: flex; align-items: center; gap: 6px; }
+        .pl-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+        /* A6 GUARDRAILS */
+        .gr-row { display: flex; gap: 48px; align-items: center; flex-wrap: wrap; }
+        .gr-ch { flex: 1; min-width: 280px; max-width: 400px; }
+        .gr-ch h3 { font-size: 14px; font-weight: 600; margin-bottom: 24px; color: var(--ink-navy); }
+        .br-row { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+        .br-lbl { width: 170px; font-size: 11px; color: var(--dark-neutral); text-align: right; flex-shrink: 0; }
+        .br-tk { flex: 1; height: 16px; background: var(--surface-alt); border: 1px solid var(--gray-line); border-radius: 2px; overflow: hidden; }
+        .br-fl { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; }
+        .br-fl span { font-size: 9px; color: var(--surface); }
+        .bf-cy { background: var(--ink-navy); }
+        .bf-hl { background: var(--accent-cobalt); }
+        .bf-df { background: var(--gray-line); }
+        
+        .gr-br { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100px; flex-shrink: 0; }
+        .gr-br p { font-size: 12px; text-align: center; color: var(--dark-neutral); margin-bottom: 8px;}
+        .gr-br .arr { font-size: 24px; color: var(--gray-line); }
+        
+        .gr-d { flex: 1; min-width: 280px; max-width: 400px; }
+        .gr-bx { background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-lg); padding: 32px; }
+        .gr-ags { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
+        .gr-ag-icon { width: 32px; height: 32px; border: 1px solid var(--gray-line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; background: var(--surface-alt); }
+        .gr-lb { font-size: 10px; color: var(--dark-neutral); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        .gr-aw { text-align: center; font-size: 14px; color: var(--gray-line); margin: 8px 0; }
+        .gr-ap { background: var(--accent-cobalt); border-radius: var(--radius-sm); padding: 16px; margin: 8px 0; }
+        .gr-ap h4 { font-size: 12px; font-weight: 500; color: var(--surface); text-align: center; margin-bottom: 12px; }
+        .gr-tg { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .gr-t { border: 1px solid rgba(255,255,255,0.4); border-radius: 2px; padding: 4px 8px; font-size: 9px; color: var(--surface); }
+        .gr-mn { background: var(--surface-alt); border: 1px solid var(--gray-line); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+        .gr-mn h4 { font-size: 11px; font-weight: 600; color: var(--ink-navy); margin-bottom: 4px;}
+        .gr-mn p { font-size: 10px; color: var(--dark-neutral); }
+        .gr-nt { text-align: center; font-size: 13px; color: var(--dark-neutral); margin-top: 32px; }
+        .gr-nt strong { color: var(--ink-navy); }
+
+        /* ARCHITECTURE Layers */
+        .arch-card { background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-lg); padding: 48px; }
+        .arch-title { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--gray-line); margin-bottom: 8px; }
+        .arch-h { font-size: 24px; font-weight: 600; color: var(--ink-navy); margin-bottom: 40px; letter-spacing: -0.5px; }
+        
+        .arch-wrap { display: flex; gap: 16px; position: relative; }
+        .arch-cm { width: 40px; flex-shrink: 0; }
+        .cm-bar {
+            height: 100%; background: var(--surface-alt); border: 1px solid var(--gray-line); border-radius: var(--radius-sm);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 4px;
+        }
+        .cm-t { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-size: 10px; color: var(--accent-orange); letter-spacing: 1px; font-weight: 600; }
+        
+        .arch-layers { flex: 1; display: flex; flex-direction: column-reverse; gap: 16px; }
+        .al { border-radius: var(--radius-sm); padding: 24px; display: flex; align-items: center; gap: 32px; border: 1px solid var(--gray-line); background: var(--surface); }
+        .al-info { min-width: 140px; flex-shrink: 0; }
+        .al-info h4 { font-size: 13px; font-weight: 600; color: var(--ink-navy); }
+        .al-info p { font-size: 11px; color: var(--dark-neutral); margin-top: 4px; }
+        .al-c { flex: 1; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+        /* Specific Layers matching house style */
+        .al2 { border-color: var(--accent-cobalt); }
+        .al3 { background: var(--surface-alt); }
+        .al4 { border-left: 4px solid var(--accent-violet); }
+
+        .it, .oi, .ag, .ac { background: var(--surface); border: 1px solid var(--gray-line); border-radius: 4px; padding: 6px 12px; font-size: 11px; color: var(--ink-navy); }
+        .ac { color: var(--accent-cobalt); font-family: monospace; font-size: 10px; background: var(--surface-alt); border-color: transparent; }
+        .ag { border-color: var(--accent-violet); }
+
+        .arch-fw { width: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border-left: 1px solid var(--gray-line); padding-left: 16px;}
+        .fw-text { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-size: 10px; color: var(--gray-line); letter-spacing: 1px; font-weight: 500; }
+
+        /* =================== IX. THREE STEPS TO AI-READY FINANCE (NEW) =================== */
+        .s9-grid {
+            display: grid;
+            grid-template-columns: 1fr 32px 1fr 32px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .s9-arrow { display: flex; align-items: center; justify-content: center; height: 120px; color: var(--gray-line); font-size: 24px; font-weight: 300; }
+        .s9-col { display: flex; flex-direction: column; gap: 24px; }
+
+        /* Headers */
+        .s9-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+        .s9-num { font-size: 48px; font-weight: 700; color: var(--gray-light); line-height: 0.9; }
+        .s9-info { display: flex; flex-direction: column; gap: 8px; }
+        .s9-pill {
+            font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; 
+            padding: 4px 8px; border-radius: 4px; display: inline-block; width: fit-content;
+            background: var(--surface-alt);
+        }
+        .s9-title { font-size: 20px; font-weight: 600; color: var(--ink-navy); line-height: 1.2; }
+
+        /* Step Colors */
+        .s9-p1 { border: 1px solid var(--accent-cobalt); color: var(--accent-cobalt); }
+        .s9-p2 { border: 1px solid var(--accent-teal); color: var(--accent-teal); }
+        .s9-p3 { border: 1px solid var(--accent-orange); color: var(--accent-orange); }
+
+        /* Cards */
+        .s9-card {
+            background: var(--surface); border: 1px solid var(--gray-line); 
+            border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 16px;
+        }
+        .s9-card-title {
+            font-size: 11px; font-family: monospace; color: var(--dark-neutral); text-transform: uppercase; 
+            letter-spacing: 0.5px; border-bottom: 1px solid var(--gray-light); padding-bottom: 12px; margin-bottom: 4px; font-weight: 600;
+        }
+
+        /* Step 1 Elements */
+        .s9-src-label { font-size: 10px; text-transform: uppercase; color: var(--dark-neutral); margin-bottom: 8px; font-weight: 600; }
+        .s9-src-row { display: flex; flex-wrap: wrap; gap: 8px; }
+        .s9-src-chip { font-size: 11px; font-family: monospace; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--gray-line); background: var(--surface-alt); color: var(--ink-navy); }
+        
+        .s9-pillar { display: flex; gap: 12px; padding: 16px; border: 1px solid var(--gray-line); border-radius: var(--radius-md); background: var(--surface-alt); }
+        .s9-pillar-icon { font-size: 16px; flex-shrink: 0; }
+        .s9-pillar-title { font-size: 13px; font-weight: 600; color: var(--ink-navy); margin-bottom: 4px; }
+        .s9-pillar-desc { font-size: 12px; color: var(--dark-neutral); line-height: 1.5; }
+
+        .s9-recon-box { background: var(--surface-alt); border: 1px solid var(--accent-orange); border-radius: var(--radius-md); padding: 16px; }
+        .s9-recon-head { font-family: monospace; font-size: 11px; color: var(--accent-orange); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;}
+        .s9-recon-row { display: flex; gap: 8px; font-family: monospace; font-size: 11px; align-items: center; margin-bottom: 6px; }
+        .s9-recon-col-1 { width: 80px; flex-shrink: 0; color: var(--dark-neutral); }
+        .s9-recon-col-val { background: var(--surface); border: 1px solid var(--gray-line); padding: 2px 6px; border-radius: 2px; width: 50px; color: var(--ink-navy); }
+        .s9-recon-col-icon { width: 40px; font-weight: 600;}
+        .s9-recon-col-err { color: var(--accent-orange); width: 40px;}
+
+        /* Step 2 Elements */
+        .s9-score-big { font-size: 48px; font-weight: 700; color: var(--accent-teal); line-height: 1; }
+        .s9-score-bar-wrap { height: 8px; background: var(--gray-light); border-radius: 4px; overflow: hidden; margin: 12px 0;}
+        .s9-score-bar-fill { height: 100%; width: 87%; background: var(--accent-teal); border-radius: 4px; }
+        .s9-score-cats { display: flex; gap: 16px; }
+        .s9-score-cat { font-family: monospace; font-size: 11px; text-align: left; }
+        .s9-sc-v { font-size: 14px; font-weight: 700; display: block; margin-bottom: 2px;}
+        .s9-sc-n { color: var(--dark-neutral); display: block; }
+        
+        .s9-alert { background: var(--surface-alt); border: 1px solid var(--accent-orange); border-left: 4px solid var(--accent-orange); border-radius: var(--radius-sm); padding: 12px; font-family: monospace; font-size: 11px; }
+        .s9-alert-title { color: var(--accent-orange); font-weight: 600; margin-bottom: 4px; }
+        .s9-alert-body { color: var(--dark-neutral); }
+
+        .s9-chat-q { background: var(--accent-cobalt); color: var(--surface); padding: 12px 16px; border-radius: 12px 12px 0 12px; font-size: 13px; align-self: flex-end; width: fit-content; margin-left: auto; line-height: 1.4;}
+        .s9-chat-a { background: var(--surface-alt); border: 1px solid var(--gray-line); padding: 16px; border-radius: 0 12px 12px 12px; font-size: 13px; margin-top: 12px; }
+        .s9-chat-a-head { font-family: monospace; font-size: 11px; color: var(--dark-neutral); margin-bottom: 12px; }
+        .s9-chat-a-head strong { color: var(--accent-teal); }
+        .s9-ct-row { display: flex; gap: 12px; font-family: monospace; font-size: 11px; padding: 6px 0; border-bottom: 1px solid var(--gray-light); }
+        .s9-ct-row:last-child { border: none; padding-bottom: 0;}
+        .s9-ct-r { flex: 1; color: var(--dark-neutral); }
+        .s9-ct-v { color: var(--ink-navy); font-weight: 600; width: 60px; }
+        .s9-ct-pct { width: 50px; font-weight: 700; color: var(--accent-teal);}
+
+        .s9-gl-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--gray-light); font-family: monospace; font-size: 11px; }
+        .s9-gl-row:last-child { border: none; padding-bottom: 0;}
+        .s9-gl-hd { color: var(--dark-neutral); text-transform: uppercase; font-weight: 600; padding-bottom: 4px;}
+        .s9-gl-id { color: var(--gray-line); width: 56px; }
+        .s9-gl-ab { color: var(--ink-navy); font-weight: 600; width: 60px; }
+        .s9-gl-nm { color: var(--dark-neutral); flex: 1; }
+        .s9-gl-type { padding: 2px 8px; border-radius: 4px; background: var(--surface-alt); border: 1px solid var(--gray-line); color: var(--ink-navy); }
+
+        /* Step 3 Elements */
+        .s9-pa-fn { font-family: monospace; font-size: 12px; padding: 6px 12px; margin-bottom: 8px; background: var(--surface-alt); border: 1px solid var(--gray-line); border-left: 2px solid var(--accent-orange); border-radius: 4px; color: var(--dark-neutral); }
+        .s9-pa-fn .fn { color: var(--accent-cobalt); font-weight: 600;}
+
+        .s9-terminal { background: var(--ink-navy); color: #e5e6e3; padding: 20px; border-radius: var(--radius-md); font-family: monospace; font-size: 12px; line-height: 1.7; overflow-x: auto; border: 1px solid var(--dark-neutral);}
+        .s9-term-c { color: var(--gray-line); }
+        .s9-term-k { color: var(--accent-violet); }
+        .s9-term-s { color: var(--accent-teal); }
+        .s9-term-f { color: #82aaff; } /* Keeping a slightly brighter blue for dark mode readability */
+        .s9-term-ok { color: var(--accent-teal); font-weight: 600;}
+
+        .s9-agent-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; border: 1px solid var(--accent-orange); background: var(--surface-alt); border-radius: var(--radius-sm); font-size: 13px; font-weight: 500; color: var(--ink-navy); margin-bottom: 8px;}
+        .s9-agent-status { font-size: 10px; padding: 4px 8px; border-radius: 4px; font-family: monospace; background: var(--surface); border: 1px solid var(--gray-line); color: var(--accent-orange); text-transform: uppercase;}
+        
+        .s9-out-chips { display: flex; gap: 8px; margin-top: 16px;}
+        .s9-out-chip { flex: 1; background: var(--surface); border: 1px solid var(--gray-line); border-radius: var(--radius-sm); padding: 12px 8px; text-align: center; font-family: monospace; font-size: 11px; color: var(--dark-neutral); }
+        .s9-out-chip .oc-ico { font-size: 18px; display: block; margin-bottom: 8px; }
+
+        @media (max-width: 900px) {
+            .s9-grid { grid-template-columns: 1fr; gap: 48px; }
+            .s9-arrow { display: none; }
+        }
+
+        /* FOOTER */
+        footer { text-align: center; padding: 64px 40px; font-size: 12px; color: var(--dark-neutral); }
+        footer strong { color: var(--ink-navy); font-size: 13px; }
+
+        /* Overrides to adapt main grid scroll responsive behavior */
+        @media (max-width: 900px) {
+            .drift-layout { flex-direction: column; }
+            .drift-contract { width: 100%; flex: auto; }
+            .drift-flow { flex-direction: row; width: 100%; height: auto; }
+            .df-text { writing-mode: horizontal-tb; transform: none; }
+            .dt-grid { display: grid; overflow-x: auto; white-space: nowrap; }
+            .drift-table-area { overflow-x: auto; width: 100%; }
+            .drift-legend-row { flex-direction: column; }
+            .drift-consequences { flex-direction: column; }
+            .dc-label { border-right: none; border-bottom: 1px solid var(--gray-light); padding-right: 0; padding-bottom: 16px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="inner">
+            <div class="logo">Keboola<span>Financial Intelligence Suite</span></div>
+            <a href="#s1">I. World Changed</a>
+            <a href="#s2">II. CFO Evolution</a>
+            <a href="#s3">III. Data Problem</a>
+            <a href="#s4">IV. Before/After</a>
+            <a href="#s5">V. How It Works</a>
+            <a href="#s6">VI. Guardrails</a>
+            <a href="#s7">VII. Architecture</a>
+            <a href="#s9">VIII. AI-Ready</a>
+        </div>
+    </nav>
+
+    <section id="s1">
+        <div class="sn">Section I</div>
+        <div class="st">The World Has Changed</div>
+        <div class="ss">What 200 finance chiefs at billion-dollar companies say is top of mind for 2026</div>
+        <div class="card cp">
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-num blue">87%</div>
+                    <div class="stat-bar"><div class="stat-bar-f blue" style="width:87%"></div></div>
+                    <div class="stat-desc">of CFOs say AI will be <strong>extremely or very important</strong> to finance in 2026</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num blue">54%</div>
+                    <div class="stat-bar"><div class="stat-bar-f blue" style="width:54%"></div></div>
+                    <div class="stat-desc">say <strong>integrating AI agents</strong> is their top priority</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num amber">21%</div>
+                    <div class="stat-bar"><div class="stat-bar-f amber" style="width:21%"></div></div>
+                    <div class="stat-desc">say AI has actually delivered <strong>clear, measurable value</strong></div>
+                </div>
+            </div>
+            <div class="tension">The ambition is there. The results <em>aren't</em>. Yet.</div>
+            <div class="src-line">Deloitte Q4 2025 CFO Signals Survey — 200 finance chiefs at $1B+ North American companies</div>
+        </div>
+    </section>
+
+    <section style="padding-top:0">
+        <div class="card cp">
+            <div class="charts-row">
+                <div class="chart-group">
+                    <h3>Number of Applications Today</h3>
+                    <div class="donut-wrap">
+                        <svg viewBox="0 0 200 200">
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#e5e6e3" stroke-width="24" stroke-dasharray="88 352" stroke-dashoffset="0" />
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#a4aaa8" stroke-width="24" stroke-dasharray="66 374" stroke-dashoffset="-88" />
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#2864dc" stroke-width="24" stroke-dasharray="158 282" stroke-dashoffset="-154" />
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#783cdc" stroke-width="24" stroke-dasharray="70 370" stroke-dashoffset="-312" />
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#1a1a2c" stroke-width="24" stroke-dasharray="26 414" stroke-dashoffset="-382" />
+                            <circle cx="100" cy="100" r="70" fill="none" stroke="#f0f0eb" stroke-width="24" stroke-dasharray="31 409" stroke-dashoffset="-408" />
+                        </svg>
+                        <div class="donut-ctr">
+                            <div class="donut-hero">52%</div>
+                            <div class="donut-sub">have 50+ apps</div>
+                        </div>
+                    </div>
+                    <div class="legend">
+                        <div class="leg"><div class="ldot" style="background:#e5e6e3"></div>1–10 (20%)</div>
+                        <div class="leg"><div class="ldot" style="background:#a4aaa8"></div>11–50 (15%)</div>
+                        <div class="leg"><div class="ldot" style="background:#2864dc"></div>51–100 (36%)</div>
+                        <div class="leg"><div class="ldot" style="background:#783cdc"></div>101–1K (16%)</div>
+                        <div class="leg"><div class="ldot" style="background:#1a1a2c"></div>1K+ (6%)</div>
+                    </div>
+                </div>
+                <div class="chart-group">
+                    <h3>And It's About to Get Worse</h3>
+                    <div class="growth-row">
+                        <div class="growth-card">
+                            <div class="gc-num">40%</div>
+                            <div class="gc-lbl">of enterprise apps will feature <strong>AI agents</strong> by 2026</div>
+                        </div>
+                        <div class="growth-card">
+                            <div class="gc-num">75%</div>
+                            <div class="gc-lbl">of new apps will be built with <strong>low-code</strong> by 2026</div>
+                        </div>
+                    </div>
+                    <div class="app-trajectory">
+                        <div class="traj-card"><div class="traj-yr">2020</div><div class="traj-num">110</div><div class="traj-lbl">apps</div></div>
+                        <div class="traj-arrow">→</div>
+                        <div class="traj-card"><div class="traj-yr">2023</div><div class="traj-num">254</div><div class="traj-lbl">apps</div></div>
+                        <div class="traj-arrow">→</div>
+                        <div class="traj-card"><div class="traj-yr">2026</div><div class="traj-num">291</div><div class="traj-lbl">apps</div></div>
+                        <div class="traj-arrow">→</div>
+                        <div class="traj-card future"><div class="traj-yr">Soon</div><div class="traj-num">?</div><div class="traj-lbl">+ AI agents</div></div>
+                    </div>
+                    <div class="growth-note">Each new agent = <em>another data source, another integration point</em></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="s2">
+        <div class="sn">Section II</div>
+        <div class="st">The CFO Must Evolve</div>
+        <div class="ss">Three stages of evolution — and a barrier most organizations never cross</div>
+        <div class="card cp">
+            <div class="evo-track">
+                <div class="evo-stage">
+                    <div class="evo-iw">🧮</div>
+                    <h3>Score Keeper</h3>
+                    <p>Maintain · Provide</p>
+                </div>
+                <span class="evo-arr">→</span>
+                <div class="evo-stage">
+                    <div class="evo-iw">🛡️</div>
+                    <h3>Financial Steward</h3>
+                    <p>Align · Manage</p>
+                </div>
+                <span class="evo-arr">→</span>
+                <div class="evo-stage">
+                    <div class="evo-iw">🧭</div>
+                    <h3>Strategic Partner</h3>
+                    <p>Steer · Prioritize</p>
+                </div>
+                <div class="evo-barrier">
+                    <div class="evo-bl"></div>
+                    <div class="evo-blbl">The Gap</div>
+                </div>
+                <div class="evo-stage final">
+                    <div class="evo-iw">✨</div>
+                    <h3>Intelligent Finance</h3>
+                    <p>Organizational transformation</p>
+                </div>
+            </div>
+            <div class="evo-note">The leap requires a new operating model — a learning engine at the core.</div>
+        </div>
+    </section>
+
+    <section style="padding-top:0">
+        <div class="card cp" style="text-align:center">
+            <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gray-line);margin-bottom:32px">The Finance Operating Model</div>
+            <div class="fw-ctr">
+                <svg viewBox="0 0 480 480">
+                    <defs>
+                        <marker id="am" markerWidth="6" markerHeight="4.5" refX="3" refY="2.25" orient="auto">
+                            <path d="M0,0 L6,2.25 L0,4.5Z" class="fw-ah" />
+                        </marker>
+                    </defs>
+                    <text class="fw-o" x="240" y="62">Faster close cycles</text>
+                    <text class="fw-o" x="420" y="244">Better forecasts</text>
+                    <text class="fw-o" x="240" y="432">Fewer errors</text>
+                    <text class="fw-o" x="58" y="244">Stronger compliance</text>
+                    
+                    <path d="M268,100 C310,90 340,108 354,132" class="fw-a" marker-end="url(#am)" />
+                    <path d="M374,168 C392,210 392,298 374,330" class="fw-a" marker-end="url(#am)" />
+                    <path d="M354,348 C335,370 290,385 258,385" class="fw-a" marker-end="url(#am)" />
+                    <path d="M222,385 C186,382 148,368 128,348" class="fw-a" marker-end="url(#am)" />
+                    <path d="M106,330 C88,295 88,204 106,168" class="fw-a" marker-end="url(#am)" />
+                    <path d="M128,132 C148,110 195,92 222,96" class="fw-a" marker-end="url(#am)" />
+                    
+                    <circle cx="240" cy="240" r="56" fill="var(--surface-alt)" stroke="var(--accent-orange)" stroke-width="1"/>
+                    <text x="240" y="230" font-size="12" fill="var(--ink-navy)" text-anchor="middle" font-weight="600">Corporate</text>
+                    <text x="240" y="245" font-size="12" fill="var(--ink-navy)" text-anchor="middle" font-weight="600">Memory</text>
+                    <text x="240" y="260" font-size="7" fill="var(--dark-neutral)" text-anchor="middle">Continuously updated</text>
+                    
+                    <g transform="translate(240,95)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-4">📥</text><text class="fw-l" y="12">Data Flows In</text></g>
+                    <g transform="translate(365,148)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-6">🔗</text><text class="fw-l" y="8" font-size="8">Meaning Forms</text><text class="fw-sl" y="18">from Data</text></g>
+                    <g transform="translate(365,332)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-4">⚙️</text><text class="fw-l" y="12">Agents Act</text></g>
+                    <g transform="translate(240,385)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-4">📊</text><text class="fw-l" y="12">Outputs</text></g>
+                    <g transform="translate(115,332)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-6">🔁</text><text class="fw-l" y="9" font-size="8.5">Outcomes</text><text class="fw-sl" y="19">Feed Back</text></g>
+                    <g transform="translate(115,148)"><circle r="27" class="fw-nb" /><text class="fw-i" y="-6">🧠</text><text class="fw-l" y="9" font-size="8.5">System</text><text class="fw-sl" y="19">Learns</text></g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="s3">
+        <div class="sn">Section III</div>
+        <div class="st">Why Traditional Approaches Fail</div>
+        <div class="ss">The reality of enterprise financial data flows</div>
+
+        <div class="tagline-hero" style="margin-bottom:32px">
+            <div class="tl-main">Data movement is solved.</div>
+            <div class="tl-em">Data meaning is not.</div>
+            <div class="tl-quest">...but is movement really solved? Even that is only partially true.</div>
+        </div>
+
+        <div class="card cp">
+            <svg class="sp-svg" viewBox="0 0 1000 460">
+                <defs>
+                    <marker id="aok" markerWidth="5" markerHeight="3.5" refX="4" refY="1.75" orient="auto">
+                        <path d="M0,0 L5,1.75 L0,3.5" fill="none" stroke="#2864dc" stroke-width=".7" />
+                    </marker>
+                    <marker id="agr" markerWidth="5" markerHeight="3.5" refX="4" refY="1.75" orient="auto">
+                        <path d="M0,0 L5,1.75 L0,3.5" fill="none" stroke="#a4aaa8" stroke-width=".7" />
+                    </marker>
+                </defs>
+                <path d="M200,75 Q350,38 435,115" class="fok" marker-end="url(#aok)" />
+                <path d="M495,170 Q495,242 495,272" class="fok" marker-end="url(#aok)" />
+                <path d="M555,140 Q640,125 705,150" class="fok" marker-end="url(#aok)" />
+                <path d="M255,95 Q315,195 415,140" class="fint" marker-end="url(#agr)" />
+                <path d="M765,180 Q810,245 775,308" class="fint" />
+                <path d="M168,108 Q128,215 168,272" class="fint" marker-end="url(#agr)" />
+                <path d="M495,315 Q395,362 325,358" class="fint" />
+                <path d="M585,305 Q645,345 675,372" class="fint" marker-end="url(#agr)" />
+                <path d="M218,315 Q315,345 415,335" class="fint" />
+                <path d="M825,170 Q895,245 855,335" class="fint" marker-end="url(#agr)" />
+                <path d="M545,76 Q615,48 705,65" class="fbrk" />
+                <path d="M755,100 Q645,195 565,150" class="fbrk" />
+                <path d="M435,315 Q345,275 255,290" class="fbrk" />
+                <path d="M315,374 Q445,422 555,392" class="fbrk" />
+                
+                <g transform="translate(108,48)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">📜</text><text class="nl" x="73" y="23">Ironclad</text><text class="nsl" x="73" y="37">Contracts</text>
+                </g>
+                <g transform="translate(395,48)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">☁️</text><text class="nl" x="73" y="23">Salesforce</text><text class="nsl" x="73" y="37">CRM / Deals</text>
+                </g>
+                <g transform="translate(695,48)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">🛒</text><text class="nl" x="73" y="23">Coupa</text><text class="nsl" x="73" y="37">Procurement</text>
+                </g>
+                <g transform="translate(78,262)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">💲</text><text class="nl" x="73" y="23">CPQ</text><text class="nsl" x="73" y="37">Pricing</text>
+                </g>
+                <g transform="translate(415,120)">
+                    <rect class="nr hub" width="145" height="62" />
+                    <text class="ni" x="28" y="31">🏢</text><text class="nl" x="86" y="25" style="font-size:12px">NetSuite</text><text class="nsl" x="86" y="40">Accounting / ERP</text>
+                </g>
+                <g transform="translate(735,135)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">⚙️</text><text class="nl" x="73" y="23">Internal Apps</text><text class="nsl" x="73" y="37">Custom Tools</text>
+                </g>
+                <g transform="translate(138,345)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">📊</text><text class="nl" x="73" y="23">Mixpanel</text><text class="nsl" x="73" y="37">Analytics</text>
+                </g>
+                <g transform="translate(415,278)">
+                    <rect class="nr" width="128" height="54" />
+                    <text class="ni" x="24" y="27">📒</text><text class="nl" x="78" y="23">General Ledger</text><text class="nsl" x="78" y="37">Accounting</text>
+                </g>
+                <g transform="translate(555,365)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">🔧</text><text class="nl" x="73" y="23">Jira</text><text class="nsl" x="73" y="37">Engineering</text>
+                </g>
+                <g transform="translate(765,305)">
+                    <rect class="nr" width="118" height="54" />
+                    <text class="ni" x="24" y="27">🚚</text><text class="nl" x="73" y="23">Logistics</text><text class="nsl" x="73" y="37">Supply Chain</text>
+                </g>
+                
+                <g transform="translate(365,105)">
+                    <rect class="bw" width="96" height="18" x="-48" y="-9" />
+                    <text class="btw">⚠ Schema mismatch</text>
+                </g>
+                <g transform="translate(625,44)">
+                    <rect class="be" width="96" height="18" x="-48" y="-9" />
+                    <text class="bte">✕ Validation failed</text>
+                </g>
+                <g transform="translate(825,288)">
+                    <rect class="bs" width="104" height="18" x="-52" y="-9" />
+                    <text class="bts">⟳ Stale data — 72h lag</text>
+                </g>
+                <g transform="translate(335,225)">
+                    <rect class="bw" width="86" height="18" x="-43" y="-9" />
+                    <text class="btw">? Unreconciled</text>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="s4">
+        <div class="sn">Section IV</div>
+        <div class="st">The Before / After Moment</div>
+        <div class="ss">Pick the scenario that hits hardest — same architecture solves all three</div>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="showTab(this,'close')">Month-End Close</div>
+            <div class="tab" onclick="showTab(this,'revenue')">Revenue Recognition</div>
+            <div class="tab" onclick="showTab(this,'budget')">Budget vs. Actuals</div>
+        </div>
+        
+        <div class="scenario active" id="close">
+            <div class="comparison">
+                <div class="before">
+                    <div class="sl">Before</div>
+                    <div class="s-title">The 12-Day Close</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">1-3</div><div><div class="tld">Days 1–3: Data Extraction</div><div class="tlp">Pull data from 7 systems. Manual exports, copy-paste, format conversion.</div></div></div>
+                        <div class="tli"><div class="tlm">4-6</div><div><div class="tld">Days 4–6: Reconciliation</div><div class="tlp">Revenue doesn't match billing. Three deals never made it to NetSuite. $400K invoice has wrong terms.</div><span class="bdg br">3 unresolved discrepancies</span></div></div>
+                        <div class="tli"><div class="tlm">7-9</div><div><div class="tld">Days 7–9: Investigation</div><div class="tlp">Track down amendments. Find duplicate journal entries. Discover cost center mismatches.</div></div></div>
+                        <div class="tli"><div class="tlm">12</div><div><div class="tld">Day 12: Close</div><div class="tlp">Board asks about segment profitability — answer takes a week.</div><span class="bdg br">60% confidence</span></div></div>
+                    </div>
+                </div>
+                <div class="after">
+                    <div class="sl">After</div>
+                    <div class="s-title">The 3-Day Close</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">∞</div><div><div class="tld">Continuous: Context Graph Running</div><div class="tlp">Data flows from all systems in real-time. Every entity linked. Discrepancies flagged instantly.</div><span class="bdg bb">Real-time reconciliation</span></div></div>
+                        <div class="tli"><div class="tlm">1</div><div><div class="tld">Day 1: Auto-Resolution</div><div class="tlp">Reconciliation Agent resolved 94% of discrepancies. Remaining 6% flagged with audit trails.</div><span class="bdg bg">94% auto-resolved</span></div></div>
+                        <div class="tli"><div class="tlm">2</div><div><div class="tld">Day 2: Human Review</div><div class="tlp">Team reviews exceptions. Budget Drift Agent surfaces 12% marketing overspend with root cause.</div></div></div>
+                        <div class="tli"><div class="tlm">3</div><div><div class="tld">Day 3: Close with Confidence</div><div class="tlp">Board question answered in 30 seconds from context graph.</div><span class="bdg bg">98% confidence</span></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="diff"><h4>The Difference</h4><p>Not faster spreadsheets. A different operating model where <em>reconciliation is continuous</em> and the system gets better every cycle.</p></div>
+        </div>
+
+        <div class="scenario" id="revenue">
+            <div class="comparison">
+                <div class="before">
+                    <div class="sl">Before</div>
+                    <div class="s-title">The ASC 606 Scramble</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">1</div><div><div class="tld">Manual Contract Review</div><div class="tlp">2,000+ active contracts. Hundreds reviewed per quarter.</div><span class="bdg br">2,000+ contracts</span></div></div>
+                        <div class="tli"><div class="tlm">2</div><div><div class="tld">Amendments in the Wild</div><div class="tlp">Amendments in email threads. Side letters in PDFs. No system tracks them.</div></div></div>
+                        <div class="tli"><div class="tlm">3</div><div><div class="tld">Audit Documentation</div><div class="tlp">6 weeks assembling docs. Single question requires 5 systems to answer.</div><span class="bdg br">2 days per question</span></div></div>
+                    </div>
+                </div>
+                <div class="after">
+                    <div class="sl">After</div>
+                    <div class="s-title">Continuous Revenue Intelligence</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">1</div><div><div class="tld">Auto-Parsed Contracts</div><div class="tlp">Performance obligations identified, matched to pricing, linked to revenue schedule.</div><span class="bdg bg">Continuous parsing</span></div></div>
+                        <div class="tli"><div class="tlm">2</div><div><div class="tld">Amendment Impact Analysis</div><div class="tlp">Context graph flags downstream impact instantly — schedules, invoices, ASC 606 triggers.</div><span class="bdg bb">Instant impact</span></div></div>
+                        <div class="tli"><div class="tlm">3</div><div><div class="tld">Living Audit Trail</div><div class="tlp">Auditor questions answered in seconds — every source linked, every calculation traceable.</div><span class="bdg bg">30 seconds per question</span></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="diff"><h4>The Difference</h4><p>Revenue recognition becomes a <em>continuous process</em>, not a quarterly crisis.</p></div>
+        </div>
+
+        <div class="scenario" id="budget">
+            <div class="comparison">
+                <div class="before">
+                    <div class="sl">Before</div>
+                    <div class="s-title">The Monthly Surprise</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">1</div><div><div class="tld">Stale Data</div><div class="tlp">Spend fragmented across Coupa, Concur, Workday, Jira. Report data is 3 weeks old.</div><span class="bdg br">3-week data lag</span></div></div>
+                        <div class="tli"><div class="tlm">2</div><div><div class="tld">Naming Chaos</div><div class="tlp">Is "cloud infrastructure" the same as "AWS hosting"? 1 week/month normalizing categories.</div><span class="bdg br">1 week/month normalizing</span></div></div>
+                        <div class="tli"><div class="tlm">3</div><div><div class="tld">Painful Reforecasting</div><div class="tlp">Mid-year reforecast: 4 weeks. Every department uses different assumptions.</div><span class="bdg br">4 weeks to reforecast</span></div></div>
+                    </div>
+                </div>
+                <div class="after">
+                    <div class="sl">After</div>
+                    <div class="s-title">Living Budget Intelligence</div>
+                    <div class="tl">
+                        <div class="tli"><div class="tlm">1</div><div><div class="tld">Unified Categories</div><div class="tlp">Business Glossary maps all naming variations to unified categories — automatically.</div><span class="bdg bg">Auto-harmonized</span></div></div>
+                        <div class="tli"><div class="tlm">2</div><div><div class="tld">Real-Time Variance Alerts</div><div class="tlp">Marketing 12% over plan? Alert with context: campaigns, vendors, approvals.</div><span class="bdg bb">Real-time visibility</span></div></div>
+                        <div class="tli"><div class="tlm">3</div><div><div class="tld">Self-Adjusting Forecast</div><div class="tlp">Forecast Variance Agent adjusts rolling forecast. Flags where assumptions no longer hold.</div><span class="bdg bg">Continuous forecast</span></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="diff"><h4>The Difference</h4><p>From monthly rearview-mirror reporting to <em>continuous forward-looking intelligence</em>.</p></div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="s5">
+        <div class="sn">Section V</div>
+        <div class="st">How Keboola Verity Works</div>
+        <div class="ss">Data flows through three transformation layers — from scattered fragments to connected meaning</div>
+        
+        <div class="march-canvas card">
+            
+            <div class="march-top">
+                <div class="m-src-col">
+                    <div class="si">Salesforce<span class="ar">→</span></div>
+                    <div class="si">Coupa<span class="ar">→</span></div>
+                    <div class="si">CPQ<span class="ar">→</span></div>
+                    <div class="si">Ironclad<span class="ar">→</span></div>
+                    <div class="si">NetSuite<span class="ar">→</span></div>
+                    <div class="si">Mixpanel<span class="ar">→</span></div>
+                    <div class="si">Jira<span class="ar">→</span></div>
+                </div>
+
+                <div class="panes-area">
+                    <div class="panes-bg-line"></div>
+                    
+                    <div class="pane">
+                        <div class="flow-node fn-1"></div>
+                        <h4>Data Harmonization</h4>
+                        <p>Unified vocabulary across all systems</p>
+                        <div class="pane-vis">
+                            <svg viewBox="0 0 100 180" width="80">
+                                <rect x="10" y="10" width="12" height="8" rx="2" fill="#8c503c" opacity=".6" />
+                                <rect x="30" y="20" width="14" height="6" rx="2" fill="#783cdc" opacity=".6" />
+                                <rect x="15" y="35" width="10" height="10" rx="2" fill="#2864dc" opacity=".6" />
+                                <rect x="45" y="12" width="8" height="12" rx="2" fill="#147864" opacity=".6" />
+                                <text x="50" y="70" font-size="14" text-anchor="middle" fill="#a4aaa8">↓</text>
+                                <rect x="20" y="90" width="14" height="10" rx="2" fill="#8c503c" opacity=".9" />
+                                <rect x="20" y="106" width="14" height="10" rx="2" fill="#783cdc" opacity=".9" />
+                                <rect x="20" y="122" width="14" height="10" rx="2" fill="#2864dc" opacity=".9" />
+                                <rect x="20" y="138" width="14" height="10" rx="2" fill="#147864" opacity=".9" />
+                                <text x="50" y="115" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">Same shape</text>
+                                <text x="50" y="124" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">Different colors</text>
+                            </svg>
+                        </div>
+                        <div class="flow-node fn-2"></div>
+                    </div>
+
+                    <div class="pane">
+                        <div class="flow-node fn-1"></div>
+                        <h4>Data Quality</h4>
+                        <p>Validated, scored, and reconciled</p>
+                        <div class="pane-vis">
+                            <svg viewBox="0 0 100 180" width="80">
+                                <rect x="20" y="20" width="14" height="10" rx="2" fill="#2864dc" opacity=".7" />
+                                <text x="40" y="28" font-size="8" fill="#147864" font-weight="600">✓</text>
+                                <rect x="20" y="40" width="14" height="10" rx="2" fill="#8c503c" opacity=".7" />
+                                <text x="40" y="48" font-size="8" fill="#8c503c" font-weight="600">⚠</text>
+                                <rect x="20" y="60" width="14" height="10" rx="2" fill="#147864" opacity=".7" />
+                                <text x="40" y="68" font-size="8" fill="#147864" font-weight="600">✓</text>
+                                <rect x="20" y="80" width="14" height="10" rx="2" fill="#783cdc" opacity=".7" />
+                                <text x="40" y="88" font-size="8" fill="#147864" font-weight="600">✓</text>
+                                <text x="50" y="115" font-size="14" text-anchor="middle" fill="#a4aaa8">↓</text>
+                                <rect x="25" y="130" width="14" height="10" rx="2" fill="#2864dc" opacity="1" />
+                                <rect x="25" y="146" width="14" height="10" rx="2" fill="#147864" opacity="1" />
+                                <rect x="25" y="162" width="14" height="10" rx="2" fill="#783cdc" opacity="1" />
+                                <text x="55" y="150" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">Clean &</text>
+                                <text x="55" y="159" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">validated</text>
+                            </svg>
+                        </div>
+                        <div class="flow-node fn-2"></div>
+                    </div>
+
+                    <div class="pane">
+                        <div class="flow-node fn-1"></div>
+                        <h4>Context</h4>
+                        <p>Your rules & relationships applied</p>
+                        <div class="pane-vis">
+                            <svg viewBox="0 0 100 180" width="80">
+                                <circle cx="25" cy="25" r="4" fill="#2864dc" opacity=".6" />
+                                <circle cx="55" cy="20" r="4" fill="#147864" opacity=".6" />
+                                <circle cx="40" cy="45" r="4" fill="#8c503c" opacity=".6" />
+                                <circle cx="70" cy="40" r="4" fill="#783cdc" opacity=".6" />
+                                <text x="50" y="75" font-size="14" text-anchor="middle" fill="#a4aaa8">↓</text>
+                                <line x1="25" y1="105" x2="55" y2="100" stroke="#a4aaa8" stroke-width="1" opacity=".8" />
+                                <line x1="55" y1="100" x2="70" y2="120" stroke="#a4aaa8" stroke-width="1" opacity=".8" />
+                                <line x1="25" y1="105" x2="40" y2="125" stroke="#a4aaa8" stroke-width="1" opacity=".8" />
+                                <line x1="40" y1="125" x2="70" y2="120" stroke="#a4aaa8" stroke-width="1" opacity=".8" />
+                                <line x1="55" y1="100" x2="40" y2="125" stroke="#a4aaa8" stroke-width="1" opacity=".8" />
+                                
+                                <circle cx="25" cy="105" r="4" fill="#2864dc" />
+                                <circle cx="55" cy="100" r="4" fill="#147864" />
+                                <circle cx="40" cy="125" r="4" fill="#8c503c" />
+                                <circle cx="70" cy="120" r="4" fill="#783cdc" />
+                                
+                                <text x="50" y="150" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">Connected</text>
+                                <text x="50" y="159" font-size="7" fill="#333542" font-weight="500" text-anchor="middle">meaning</text>
+                            </svg>
+                        </div>
+                        <div class="flow-node fn-2"></div>
+                    </div>
+                </div>
+
+                <div class="m-graph-col">
+                    <div class="gov">
+                        <div class="gov-l">Context Graph</div>
+                        <svg class="gsvg" viewBox="0 0 200 180">
+                            <line x1="100" y1="35" x2="55" y2="65" class="ges" />
+                            <line x1="100" y1="35" x2="145" y2="60" class="ges" />
+                            <line x1="55" y1="65" x2="40" y2="110" class="ge" />
+                            <line x1="55" y1="65" x2="100" y2="90" class="ges" />
+                            <line x1="145" y1="60" x2="160" y2="105" class="ge" />
+                            <line x1="145" y1="60" x2="100" y2="90" class="ges" />
+                            <line x1="100" y1="90" x2="40" y2="110" class="ge" />
+                            <line x1="100" y1="90" x2="160" y2="105" class="ge" />
+                            <line x1="40" y1="110" x2="70" y2="148" class="ge" />
+                            <line x1="160" y1="105" x2="130" y2="148" class="ge" />
+                            <line x1="70" y1="148" x2="130" y2="148" class="ge" />
+                            <line x1="100" y1="90" x2="70" y2="148" class="ge" />
+                            <line x1="100" y1="90" x2="130" y2="148" class="ge" />
+                            
+                            <g class="gn" transform="translate(100,35)"><circle r="14"/><text class="gni" y="-2">👤</text><text y="8">Customer</text></g>
+                            <g class="gn" transform="translate(55,65)"><circle r="12"/><text class="gni" y="-2">📜</text><text y="7" font-size="5.5">Contract</text></g>
+                            <g class="gn" transform="translate(145,60)"><circle r="12"/><text class="gni" y="-2">📦</text><text y="7" font-size="5.5">Order</text></g>
+                            <g class="gn" transform="translate(100,90)"><circle r="14"/><text class="gni" y="-2">🧾</text><text y="8">Invoice</text></g>
+                            <g class="gn" transform="translate(40,110)"><circle r="11"/><text class="gni" y="-2">💰</text><text y="7" font-size="5">Payment</text></g>
+                            <g class="gn" transform="translate(160,105)"><circle r="11"/><text class="gni" y="-2">📒</text><text y="7" font-size="5">Journal</text></g>
+                            <g class="gn" transform="translate(70,148)"><circle r="10"/><text class="gni" y="-2">👥</text><text y="7" font-size="5">Users</text></g>
+                            <g class="gn" transform="translate(130,148)"><circle r="10"/><text class="gni" y="-2">📈</text><text y="7" font-size="5">Metrics</text></g>
+                        </svg>
+                    </div>
+                    <div class="cm-b"><strong>Corporate Memory</strong>Learning continuously</div>
+                </div>
+            </div>
+
+            <div class="march-bottom">
+                <div class="pipeline-title">Two Pipelines, One Architecture</div>
+
+                <div class="pipe-row">
+                    <div class="pipe-row-label fin">Finance<br>Pipeline</div>
+                    <div class="pipe-cells">
+                        <div class="pipe-cell std"><div class="pc-id">T0</div><div class="pc-name">Core Load</div></div>
+                        <div class="pipe-cell std"><div class="pc-id">T1</div><div class="pc-name">COA Build</div></div>
+                        <div class="pipe-cell cust"><div class="pc-id">T2</div><div class="pc-name">Journal Entries</div></div>
+                        <div class="pipe-cell std"><div class="pc-id">T3</div><div class="pc-name">Processing</div></div>
+                        <div class="pipe-cell std"><div class="pc-id">T4</div><div class="pc-name">Validation</div></div>
+                        <div class="pipe-cell std"><div class="pc-id">T5</div><div class="pc-name">COA Consol.</div></div>
+                        <div class="pipe-cell std"><div class="pc-id">T6</div><div class="pc-name">KPI Metrics</div></div>
+                    </div>
+                </div>
+
+                <div class="pipe-connect">
+                    <div class="pipe-connect-inner">
+                        <span class="pc-arrow">↕</span><span class="pc-arrow">↕</span><span class="pc-arrow">↕</span><span class="pc-arrow">↕</span><span class="pc-arrow">↕</span><span class="pc-arrow">↕</span><span class="pc-arrow">↕</span>
+                    </div>
+                </div>
+
+                <div class="pipe-row">
+                    <div class="pipe-row-label biz">Business<br>Process</div>
+                    <div class="pipe-cells">
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Marketing</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">POC</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Contract</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Invoice</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Collection</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Accounting</div></div>
+                        <div class="pipe-cell biz-cell"><div class="pc-name">Service</div></div>
+                    </div>
+                </div>
+                
+                <div class="pipe-legend">
+                    <span><div class="pl-dot" style="background:var(--accent-teal)"></div>Standardized (reusable)</span>
+                    <span><div class="pl-dot" style="background:var(--accent-orange)"></div>Per-ERP customization</span>
+                    <span style="font-style:italic;">All SQL · All Snowflake · All parameterized</span>
+                </div>
+            </div>
+            
+        </div>
+        </section>
+
+    <div class="divider"></div>
+
+    <section id="s6">
+        <div class="sn">Section VI</div>
+        <div class="st">Why Guardrails Matter</div>
+        <div class="ss">Deploying AI in the most regulated function of your business</div>
+        <div class="card cp">
+            <div class="gr-row">
+                <div class="gr-ch">
+                    <h3>Top Compliance Requirements (CFO Survey)</h3>
+                    <div class="br-row"><div class="br-lbl">Cybersecurity & Info Protection</div><div class="br-tk"><div class="br-fl bf-cy" style="width:92%"><span>92%</span></div></div></div>
+                    <div class="br-row"><div class="br-lbl" style="font-weight:600;color:var(--ink-navy)">Trusted / Responsible AI</div><div class="br-tk"><div class="br-fl bf-hl" style="width:75%"><span>75%</span></div></div></div>
+                    <div class="br-row"><div class="br-lbl">ESG & Sustainability</div><div class="br-tk"><div class="br-fl bf-df" style="width:68%"><span>68%</span></div></div></div>
+                    <div class="br-row"><div class="br-lbl">International Trade</div><div class="br-tk"><div class="br-fl bf-df" style="width:58%"><span>58%</span></div></div></div>
+                    <div class="br-row"><div class="br-lbl">Data Privacy (GDPR, etc.)</div><div class="br-tk"><div class="br-fl bf-df" style="width:54%"><span>54%</span></div></div></div>
+                </div>
+                <div class="gr-br"><p>How do you deploy AI agents in finance <strong>safely?</strong></p><div class="arr">→</div></div>
+                <div class="gr-d">
+                    <div class="gr-bx">
+                        <div class="gr-ags">
+                            <div class="gr-ag-icon">🔍</div><div class="gr-ag-icon">🔄</div><div class="gr-ag-icon">📊</div><div class="gr-ag-icon">📈</div><div class="gr-ag-icon">⚙️</div>
+                        </div>
+                        <div class="gr-lb">AI Agents</div>
+                        <div class="gr-aw">↓ ↓ ↓ ↓ ↓</div>
+                        <div class="gr-ap">
+                            <h4>Agentic Process APIs</h4>
+                            <div class="gr-tg"><span class="gr-t">Scoped access</span><span class="gr-t">Audit trails</span><span class="gr-t">Human-in-the-loop</span><span class="gr-t">Task permissions</span></div>
+                        </div>
+                        <div class="gr-aw">↓ ↓ ↓ ↓ ↓</div>
+                        <div class="gr-mn">
+                            <h4>Context Graph</h4>
+                            <p>Your financial data — protected & structured</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gr-nt"><strong>Guardrails aren't bolted on — they're the architecture.</strong></div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="s7">
+        <div class="sn">Section VII</div>
+        <div class="st">The Architecture</div>
+        <div class="ss">Five layers. One learning system.</div>
+
+        <div class="arch-card">
+            <div class="arch-title">The Stack</div>
+            <div class="arch-h">Intelligent Finance Architecture</div>
+            <div class="arch-wrap">
+                <div class="arch-cm">
+                    <div class="cm-bar"><div class="cm-t">Corporate Memory</div></div>
+                </div>
+                <div class="arch-layers">
+                    <div class="al al1">
+                        <div class="al-info"><h4>Integrations</h4><p>This is solved</p></div>
+                        <div class="al-c">
+                            <span class="it">Salesforce</span><span class="it">NetSuite</span><span class="it">Coupa</span><span class="it">Ironclad</span><span class="it">CPQ</span><span class="it">Mixpanel</span><span class="it">Jira</span><span class="it">Workday</span><span class="it">Concur</span><span class="it" style="border:none; background:transparent;">+ more</span>
+                        </div>
+                    </div>
+                    <div class="al al2">
+                        <div class="al-info"><h4>Context Graph</h4><p>Connected intelligence</p></div>
+                        <div class="al-c">
+                            <svg width="100%" height="20" viewBox="0 0 600 20" preserveAspectRatio="xMidYMid meet">
+                                <g>
+                                    <line x1="40" y1="10" x2="90" y2="5" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="90" y1="5" x2="140" y2="15" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="140" y1="15" x2="200" y2="8" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="200" y1="8" x2="250" y2="12" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="250" y1="12" x2="300" y2="5" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="300" y1="5" x2="350" y2="10" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="350" y1="10" x2="400" y2="15" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="400" y1="15" x2="450" y2="8" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="450" y1="8" x2="500" y2="12" stroke="#2864dc" stroke-width="1.5" />
+                                    <line x1="500" y1="12" x2="550" y2="10" stroke="#2864dc" stroke-width="1.5" />
+                                </g>
+                                <g>
+                                    <circle cx="40" cy="10" r="3.5" fill="#2864dc" />
+                                    <circle cx="90" cy="5" r="3.5" fill="#2864dc" />
+                                    <circle cx="140" cy="15" r="3.5" fill="#2864dc" />
+                                    <circle cx="200" cy="8" r="3.5" fill="#2864dc" />
+                                    <circle cx="250" cy="12" r="3.5" fill="#2864dc" />
+                                    <circle cx="300" cy="5" r="3.5" fill="#2864dc" />
+                                    <circle cx="350" cy="10" r="3.5" fill="#2864dc" />
+                                    <circle cx="400" cy="15" r="3.5" fill="#2864dc" />
+                                    <circle cx="450" cy="8" r="3.5" fill="#2864dc" />
+                                    <circle cx="500" cy="12" r="3.5" fill="#2864dc" />
+                                    <circle cx="550" cy="10" r="3.5" fill="#2864dc" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="al al3">
+                        <div class="al-info"><h4>Agentic Process APIs</h4><p>Guardrailed interfaces</p></div>
+                        <div class="al-c">
+                            <span class="ac">reconcile_invoices()</span><span class="ac">check_budget_variance()</span><span class="ac">match_contract_terms()</span><span class="ac">generate_forecast()</span><span class="ac">validate_revenue()</span><span class="ac">flag_risk()</span>
+                        </div>
+                    </div>
+                    <div class="al al4">
+                        <div class="al-info"><h4>Intelligent Agents</h4><p>Full context space</p></div>
+                        <div class="al-c">
+                            <span class="ag">🔍 Data Quality</span><span class="ag">🔄 Reconciliation</span><span class="ag">📊 Budget Drift</span><span class="ag">📈 Forecast Variance</span><span class="ag">💰 Cash Flow Sentinel</span><span class="ag">✅ Audit Readiness</span><span class="ag">🏢 Vendor Risk</span><span class="ag" style="border-style:dashed; color:var(--gray-line); border-color:var(--gray-line);">⚙️ Your Own Agent</span>
+                        </div>
+                    </div>
+                    <div class="al al5">
+                        <div class="al-info"><h4>Outputs</h4><p>Results & feedback</p></div>
+                        <div class="al-c">
+                            <span class="oi">📄 Reports</span><span class="oi">📊 Excel / Analytics</span><span class="oi">📱 Apps & Dashboards</span><span class="oi">⟲ Write-Back to Systems</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="arch-fw">
+                    <div class="fw-text">Self-Learning Cycle</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="s9">
+        <div class="sn">Section IX</div>
+        <div class="st">Three Steps to AI-Ready Finance</div>
+        <div class="ss">The moat is no longer the model — it's the infrastructure beneath it.</div>
+
+        <div class="s9-grid">
+            
+            <div class="s9-col">
+                <div class="s9-header">
+                    <div class="s9-num">01</div>
+                    <div class="s9-info">
+                        <div class="s9-pill s9-p1">Foundation</div>
+                        <div class="s9-title">Data Infrastructure & Integration</div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Integrate Financial & Non-Financial Data</div>
+                    <div>
+                        <div class="s9-src-label">Financial Systems</div>
+                        <div class="s9-src-row" style="margin-bottom: 16px;">
+                            <span class="s9-src-chip">NetSuite ERP</span>
+                            <span class="s9-src-chip">Salesforce</span>
+                            <span class="s9-src-chip">Coupa</span>
+                            <span class="s9-src-chip">Ironclad</span>
+                        </div>
+                        <div class="s9-src-label">Non-Financial Data</div>
+                        <div class="s9-src-row">
+                            <span class="s9-src-chip">Mixpanel</span>
+                            <span class="s9-src-chip">Databricks</span>
+                            <span class="s9-src-chip">Jira</span>
+                            <span class="s9-src-chip">HRIS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Reconcile Across Systems</div>
+                    <div class="s9-recon-box">
+                        <div class="s9-recon-head">★ Signed Contract = Truth</div>
+                        
+                        <div class="s9-recon-row" style="color:var(--gray-line);">
+                            <div class="s9-recon-col-1"></div>
+                            <div class="s9-recon-col-val" style="border:none;background:transparent;">Contract</div>
+                            <div class="s9-recon-col-val" style="border:none;background:transparent;">Invoice</div>
+                            <div class="s9-recon-col-icon"></div>
+                        </div>
+
+                        <div class="s9-recon-row">
+                            <div class="s9-recon-col-1">Value</div>
+                            <div class="s9-recon-col-val">$784K</div>
+                            <div class="s9-recon-col-val s9-recon-col-err">$761K</div>
+                            <div class="s9-recon-col-err">⚡ Drift</div>
+                        </div>
+
+                        <div class="s9-recon-row">
+                            <div class="s9-recon-col-1">SKU 1</div>
+                            <div class="s9-recon-col-val">$348K</div>
+                            <div class="s9-recon-col-val s9-recon-col-err">$312K</div>
+                            <div class="s9-recon-col-err">⚡ Drift</div>
+                        </div>
+
+                        <div class="s9-recon-row">
+                            <div class="s9-recon-col-1">Payment</div>
+                            <div class="s9-recon-col-val">Net 30</div>
+                            <div class="s9-recon-col-val s9-recon-col-err">Net 45</div>
+                            <div class="s9-recon-col-err">⚡ Drift</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Add Context & Meaning</div>
+                    
+                    <div class="s9-pillar">
+                        <div class="s9-pillar-icon">🔗</div>
+                        <div>
+                            <div class="s9-pillar-title">Unified Pipeline</div>
+                            <div class="s9-pillar-desc">Finance + business process tracks mapped in one governed architecture.</div>
+                        </div>
+                    </div>
+
+                    <div class="s9-pillar">
+                        <div class="s9-pillar-icon">📐</div>
+                        <div>
+                            <div class="s9-pillar-title">Semantic Layer</div>
+                            <div class="s9-pillar-desc">Shared definitions & hierarchies. Every term means the same thing everywhere.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="s9-arrow">→</div>
+
+            <div class="s9-col">
+                <div class="s9-header">
+                    <div class="s9-num">02</div>
+                    <div class="s9-info">
+                        <div class="s9-pill s9-p2">Intelligence</div>
+                        <div class="s9-title">Financial Intelligence & Agents</div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Data Quality Score</div>
+                    <div style="display: flex; align-items: center; gap: 24px;">
+                        <div class="s9-score-big">87<span style="font-size:24px;color:var(--gray-line);">/100</span></div>
+                        <div style="flex:1;">
+                            <div class="s9-score-cats">
+                                <div class="s9-score-cat"><span class="s9-sc-v" style="color:var(--accent-teal);">30/30</span><span class="s9-sc-n">Mapping</span></div>
+                                <div class="s9-score-cat"><span class="s9-sc-v" style="color:var(--accent-orange);">12/20</span><span class="s9-sc-n">Cash Flow</span></div>
+                                <div class="s9-score-cat"><span class="s9-sc-v" style="color:var(--accent-teal);">20/20</span><span class="s9-sc-n">Entity</span></div>
+                            </div>
+                            <div class="s9-score-bar-wrap"><div class="s9-score-bar-fill"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="s9-alert">
+                        <div class="s9-alert-title">⚠ 1 Issue · $130.5M Impact</div>
+                        <div class="s9-alert-body">HIGH · Balance Sheet Imbalances detected. Assets ≠ Liabilities + Equity.</div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Financial Assistant Interface</div>
+                    
+                    <div class="s9-chat-q">Compare profit margins across all regions for Q4</div>
+                    <div class="s9-chat-a">
+                        <div class="s9-chat-a-head">Regional NPM — <strong>2025 YTD</strong></div>
+                        <div class="s9-ct-row"><span class="s9-ct-r">NS_APAC</span><span class="s9-ct-v">$21.7M</span><span class="s9-ct-pct">19.3%</span></div>
+                        <div class="s9-ct-row"><span class="s9-ct-r">NS_GRP (Consol.)</span><span class="s9-ct-v">$110.3M</span><span class="s9-ct-pct">18.7%</span></div>
+                        <div class="s9-ct-row"><span class="s9-ct-r">NS_US</span><span class="s9-ct-v">$54.8M</span><span class="s9-ct-pct">18.6%</span></div>
+                        <div class="s9-ct-row"><span class="s9-ct-r">NS_EU</span><span class="s9-ct-v">$33.8M</span><span class="s9-ct-pct">18.6%</span></div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Standardized Business Glossary</div>
+                    
+                    <div>
+                        <div class="s9-gl-row s9-gl-hd">
+                            <span class="s9-gl-id">ID</span><span class="s9-gl-ab">Abbr</span><span class="s9-gl-nm">Name</span><span class="s9-gl-type" style="background:transparent;border:none;">Type</span>
+                        </div>
+                        <div class="s9-gl-row">
+                            <span class="s9-gl-id">MET_01</span><span class="s9-gl-ab">REV</span><span class="s9-gl-nm">Total Revenue</span><span class="s9-gl-type">Currency</span>
+                        </div>
+                        <div class="s9-gl-row">
+                            <span class="s9-gl-id">MET_03</span><span class="s9-gl-ab">GPM</span><span class="s9-gl-nm">Gross Margin</span><span class="s9-gl-type">Rate</span>
+                        </div>
+                        <div class="s9-gl-row">
+                            <span class="s9-gl-id">MET_04</span><span class="s9-gl-ab" style="color:var(--accent-teal);">EBITDA</span><span class="s9-gl-nm">EBITDA</span><span class="s9-gl-type">Currency</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="s9-arrow">→</div>
+
+            <div class="s9-col">
+                <div class="s9-header">
+                    <div class="s9-num">03</div>
+                    <div class="s9-info">
+                        <div class="s9-pill s9-p3">Extend</div>
+                        <div class="s9-title">Build & Automate with AI</div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Agentic Process APIs</div>
+                    <div>
+                        <div class="s9-pa-fn"><span class="fn">reconcile_invoices</span>(entity, period)</div>
+                        <div class="s9-pa-fn"><span class="fn">check_budget_variance</span>(dept, limit)</div>
+                        <div class="s9-pa-fn"><span class="fn">match_contract_terms</span>(contract_id)</div>
+                        <div class="s9-pa-fn"><span class="fn">generate_forecast</span>(scenario)</div>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Code Interface (Python)</div>
+                    <div class="s9-terminal">
+                        <span class="s9-term-c"># connect to governed finance layer</span><br>
+                        <span class="s9-term-k">from</span> keboola.fi <span class="s9-term-k">import</span> <span class="s9-term-f">FinanceOS</span><br>
+                        fi = <span class="s9-term-f">FinanceOS</span>.<span class="s9-term-f">connect</span>(<span class="s9-term-s">"prod"</span>)<br><br>
+                        
+                        <span class="s9-term-c"># build FP&A prediction agent</span><br>
+                        agent = fi.<span class="s9-term-f">create_agent</span>(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="s9-term-s">"fpna_pricing_optimizer"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;model=<span class="s9-term-s">"claude-sonnet-4"</span><br>
+                        )<br><br>
+                        
+                        <span class="s9-term-ok">✓ Registered to Financial Intelligence</span>
+                    </div>
+                </div>
+
+                <div class="s9-card">
+                    <div class="s9-card-title">Active Agents & Outputs</div>
+                    
+                    <div>
+                        <div class="s9-agent-row">
+                            <span>FP&A Prediction Agent</span>
+                            <span class="s9-agent-status">Running</span>
+                        </div>
+                        <div class="s9-agent-row" style="border-color:var(--gray-line); color:var(--dark-neutral);">
+                            <span>Scenario Planner</span>
+                            <span class="s9-agent-status" style="color:var(--dark-neutral);">Scheduled</span>
+                        </div>
+                    </div>
+
+                    <div class="s9-out-chips">
+                        <div class="s9-out-chip"><span class="oc-ico">📄</span>Reports</div>
+                        <div class="s9-out-chip"><span class="oc-ico">📊</span>Dashboards</div>
+                        <div class="s9-out-chip"><span class="oc-ico">⟲</span>Write-back</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <footer><strong>Keboola Financial Intelligence Suite</strong><br>The architecture for intelligent finance.</footer>
+
+    <script>
+        function showTab(el, id) {
+            // Find the closest section to scope the tab switching safely
+            const section = el.closest('section');
+            if (!section) return; // safety check
+            
+            // Hide all scenarios in this section
+            section.querySelectorAll('.scenario').forEach(s => s.classList.remove('active'));
+            // Remove active class from all tabs in this section
+            section.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            
+            // Show the selected scenario
+            document.getElementById(id).classList.add('active');
+            // Highlight the clicked tab
+            el.classList.add('active');
+        }
+        
+        const secs = document.querySelectorAll('section[id]');
+        const navs = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let c = '';
+            secs.forEach(s => {
+                if (scrollY >= s.offsetTop - 150) c = s.id
+            });
+            navs.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + c)
+            });
+        });
+    </script>
+</body>
+</html>
